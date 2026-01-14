@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-surface text-ink antialiased;
+}
+
+.glass-panel {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(226, 232, 240, 0.7));
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 24px 60px -30px rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(14px);
+}
