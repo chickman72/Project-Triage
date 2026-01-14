@@ -19,10 +19,10 @@ type PatientRecord = {
   medicalHistory?: string[];
   surgicalHistory?: string[];
   vitals?: {
-    bp?: string;
-    hr?: number;
-    temp?: number;
-    spo2?: number;
+    blood_pressure?: string;
+    heart_rate?: number;
+    temperature?: number;
+    oxygen_saturation?: number;
   };
   medications?: Array<
     | string
