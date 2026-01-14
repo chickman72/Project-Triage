@@ -17,9 +17,7 @@ export async function GET(request: Request) {
         query: "SELECT * FROM c WHERE c.id = @id OR c.patientId = @id",
         parameters: [{ name: "@id", value: id }]
       };
-      const { resources } = await container.items.query(query, {
-        enableCrossPartitionQuery: true
-      }).fetchAll();
+      const { resources } = await container.items.query(query).fetchAll();
 
       const patient = resources[0] ?? null;
       return NextResponse.json({ patient });
@@ -30,15 +28,13 @@ export async function GET(request: Request) {
         query:
           "SELECT c.id, c.patientId, c.full_name, c.name, c.age, c.gender, c.dob, c.chief_complaint, c.chiefComplaint FROM c"
       };
-      const { resources } = await container.items.query(query, {
-        enableCrossPartitionQuery: true
-      }).fetchAll();
+      const { resources } = await container.items.query(query).fetchAll();
 
       return NextResponse.json({ patients: resources });
     }
 
     const { resources } = await container.items
-      .query("SELECT * FROM c", { enableCrossPartitionQuery: true })
+      .query("SELECT * FROM c")
       .fetchAll();
     return NextResponse.json({ patients: resources });
   } catch (error) {

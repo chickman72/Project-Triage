@@ -207,9 +207,7 @@ export async function POST(request: Request) {
       query: "SELECT * FROM c WHERE StringEquals(c.full_name, @name, true)",
       parameters: [{ name: "@name", value: extractedName }]
     };
-    const { resources } = await container.items.query(query, {
-      enableCrossPartitionQuery: true
-    }).fetchAll();
+    const { resources } = await container.items.query(query).fetchAll();
 
     const foundPatient = resources[0];
     const now = new Date();

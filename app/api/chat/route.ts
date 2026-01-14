@@ -55,9 +55,7 @@ export async function POST(request: Request) {
           query: "SELECT * FROM c WHERE c.id = @id OR c.patientId = @id",
           parameters: [{ name: "@id", value: patientId }]
         };
-        const { resources } = await container.items.query(query, {
-          enableCrossPartitionQuery: true
-        }).fetchAll();
+        const { resources } = await container.items.query(query).fetchAll();
         const record = resources[0];
         if (record) {
           contextMessages.push({
@@ -72,7 +70,7 @@ export async function POST(request: Request) {
         });
       } else {
         const { resources } = await container.items
-          .query("SELECT TOP 3 * FROM c", { enableCrossPartitionQuery: true })
+          .query("SELECT TOP 3 * FROM c")
           .fetchAll();
 
         const contextBlock = JSON.stringify(resources, null, 2);

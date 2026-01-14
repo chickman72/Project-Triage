@@ -63,9 +63,7 @@ export async function POST(request: Request) {
       query: "SELECT * FROM c WHERE c.id = @id OR c.patientId = @id",
       parameters: [{ name: "@id", value: patientId }]
     };
-    const { resources } = await container.items.query(query, {
-      enableCrossPartitionQuery: true
-    }).fetchAll();
+    const { resources } = await container.items.query(query).fetchAll();
     const patient = resources[0];
 
     if (!patient) {
