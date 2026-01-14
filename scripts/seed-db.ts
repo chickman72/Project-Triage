@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: ".env.local" });
 
-const { cosmosClient } = await import("../lib/cosmosClient");
+const { getCosmosClient } = await import("../lib/cosmosClient");
 
 const databaseId = process.env.COSMOS_DATABASE ?? "triage_db";
 const containerId = process.env.COSMOS_CONTAINER ?? "patients";
@@ -63,7 +63,7 @@ const patients = [
 ];
 
 async function seed() {
-  const { database } = await cosmosClient.databases.createIfNotExists({
+  const { database } = await getCosmosClient().databases.createIfNotExists({
     id: databaseId
   });
   const { container } = await database.containers.createIfNotExists({

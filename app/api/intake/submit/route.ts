@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { cosmosClient } from "../../../../lib/cosmosClient";
+import { getCosmosClient } from "../../../../lib/cosmosClient";
 import { openAIClient } from "../../../../lib/openAIClient";
 import { randomUUID } from "crypto";
 
@@ -202,7 +202,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const container = cosmosClient.database(databaseId).container(containerId);
+    const container = getCosmosClient().database(databaseId).container(containerId);
     const query = {
       query: "SELECT * FROM c WHERE StringEquals(c.full_name, @name, true)",
       parameters: [{ name: "@name", value: extractedName }]

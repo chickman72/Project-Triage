@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { cosmosClient } from "../../../lib/cosmosClient";
+import { getCosmosClient } from "../../../lib/cosmosClient";
 import { openAIClient } from "../../../lib/openAIClient";
 
 type ChatMessage = {
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     ];
 
     if (mode === "provider") {
-      const container = cosmosClient
+      const container = getCosmosClient()
         .database(databaseId)
         .container(containerId);
 

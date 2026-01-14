@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { cosmosClient } from "../../../lib/cosmosClient";
+import { getCosmosClient } from "../../../lib/cosmosClient";
 
 const databaseId = process.env.COSMOS_DATABASE ?? "triage_db";
 const containerId = process.env.COSMOS_CONTAINER ?? "patients";
@@ -10,7 +10,7 @@ export async function GET(request: Request) {
     const id = searchParams.get("id");
     const summary = searchParams.get("summary") === "1";
 
-    const container = cosmosClient.database(databaseId).container(containerId);
+    const container = getCosmosClient().database(databaseId).container(containerId);
 
     if (id) {
       const query = {
